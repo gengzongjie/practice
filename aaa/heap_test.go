@@ -71,7 +71,7 @@ func heapifyBigNoMove(arr []int, count int) []int {
 		return nil
 	}
 
-	for heapifyIdx := count/2; heapifyIdx >= 0; heapifyIdx -- {
+	for heapifyIdx := (count-1)/2; heapifyIdx >= 0; heapifyIdx -- {
 		var parentIdx = heapifyIdx
 		for {
 			maxIdx := parentIdx
@@ -113,7 +113,7 @@ func heapifySmallNoMove(arr []int, count int) []int {
 		return nil
 	}
 
-	for heapifyIdx := count/2; heapifyIdx >= 0; heapifyIdx -- {
+	for heapifyIdx := (count-1)/2; heapifyIdx >= 0; heapifyIdx -- {
 		var parentIdx = heapifyIdx
 		for {
 			minIdx := parentIdx

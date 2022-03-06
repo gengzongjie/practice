@@ -15,48 +15,48 @@ type charCnt struct {
 	Cnt int
 }
 
-type charCntList struct {
+type charList struct {
 	List []charCnt
 }
-func (cl charCntList) Len() int {
-	return len(cl.List)
+
+func (c charList) Len() int {
+	return len(c.List)
 }
-func (cl charCntList) Less(i, j int) bool {
-	return cl.List[i].Cnt > cl.List[j].Cnt
+
+func (c charList) Less(i, j int) bool {
+	return c.List[i].Cnt > c.List[j].Cnt
 }
-func (cl charCntList) Swap(i, j int) {
-	cl.List[i], cl.List[j] = cl.List[j], cl.List[i]
+
+func (c charList) Swap(i, j int) {
+	c.List[i], c.List[j] = c.List[j], c.List[i]
 }
 
 func charSts(input string) string {
-	if len(input) == 0 {return ""}
-
-	var charCntMap = make(map[string]charCnt)
+	fmt.Scan()
+	var charMap = make(map[string]charCnt)
 
 	for _, c := range input {
 		char := string(c)
-		if v, ok := charCntMap[char]; ok {
+		if v, ok := charMap[char]; ok {
 			v.Cnt ++
-			charCntMap[char] = v
+			charMap[char] = v
 		} else {
-			charCntMap[char] = charCnt{
+			charMap[char] = charCnt{
 				Char: char,
 				Cnt: 1,
 			}
 		}
 	}
 
-	var stsList charCntList
-	for _, v := range charCntMap {
-		charCntNode := v
-		stsList.List = append(stsList.List, charCntNode)
+	var cl charList
+	for _, v := range charMap {
+		cl.List = append(cl.List, v)
 	}
-
-	sort.Sort(stsList)
+	sort.Sort(cl)
 
 	var output string
-	for _, l := range stsList.List {
-		output += fmt.Sprintf("%s%d", l.Char, l.Cnt)
+	for _, v := range cl.List {
+		output += fmt.Sprintf("%s%d", v.Char, v.Cnt)
 	}
 
 	return output
